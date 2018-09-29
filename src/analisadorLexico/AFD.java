@@ -31,15 +31,15 @@ public class AFD {
     {
         switch(estado)
         {
-            case 0:
+            case 1:
                 if(Character.isAlphabetic(c))
                 {
-                    estado=1;
+                    estado=2;
                     lexema+=c;
                 }
                 else if(Character.isDigit(c))
                 {
-                    estado=1;
+                    estado=3;
                     lexema+=c;
                 }
                 else
@@ -48,7 +48,7 @@ public class AFD {
                     lexema=""+c;
                 }
                 break;
-            case 1:
+            case 2:
                 if(Character.isAlphabetic(c))
                 {
                     estado=1;
