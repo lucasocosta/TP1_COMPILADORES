@@ -102,6 +102,7 @@ public class AnalisadorLexico {
                 {
                     lexema="";
                 }
+
                 break;
             case 2:
                 if(Character.isAlphabetic(c)||Character.isDigit(c))
@@ -121,6 +122,7 @@ public class AnalisadorLexico {
                     {
                         t = new Token("ID",lexema,linha);
                     }
+                    lexema="";
                     tokens.add(t);
                     computaChar(c);
                 }
@@ -148,6 +150,7 @@ public class AnalisadorLexico {
                     {
                         t = new Token("INTEGER_CONST",lexema,linha);
                     }
+                    lexema="";
                     tokens.add(t);
                     computaChar(c);
                 }
@@ -180,6 +183,7 @@ public class AnalisadorLexico {
                     {
                         t = new Token("INTEGER_CONST",lexema,linha);
                     }
+                    lexema="";
                     tokens.add(t);
                     computaChar(c);
                 }
@@ -191,11 +195,15 @@ public class AnalisadorLexico {
                     estado=1;
                     lexema+=c;
                     Token t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                    tokens.add(t);
+                    lexema="";
                 }
                 else
                 {
                     estado=1;
                     Token t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                    lexema="";
+                    tokens.add(t);
                     computaChar(c);
                 }
                 
@@ -207,11 +215,15 @@ public class AnalisadorLexico {
                     estado=1;
                     lexema+=c;
                     Token t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                    lexema="";
+                    tokens.add(t);
                 }
                 else
                 {
                     estado=1;
                     Token t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                    lexema="";
+                    tokens.add(t);
                     computaChar(c);
                 }
                 
