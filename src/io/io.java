@@ -1,0 +1,83 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package io;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+/**
+ *
+ * @author lucas
+ */
+public class io {
+    private String buffer;
+    private String arquivo;
+    private FileReader fr;
+    private BufferedReader bfr;
+    
+    public io(String arquivo) throws IOException
+    {
+        this.arquivo=arquivo;
+        this.buffer="";
+        fr=new FileReader(arquivo);
+        bfr = new BufferedReader(fr);
+    }
+    
+    public void fechar_arquivo() throws IOException
+    {
+        bfr.close();
+        fr.close();
+    }
+
+    public String getBuffer() {
+        return buffer;
+    }
+
+    public String getArquivo() {
+        return arquivo;
+    }
+
+    public void setArquivo(String arquivo) {
+        this.arquivo = arquivo;
+    }
+    
+    public void refresh() throws FileNotFoundException, IOException
+    {
+
+        String s="";
+        int i=0;
+        while(i<4096)
+        {
+            s= bfr.readLine();
+            //System.out.print(" s="+s);
+            if(s!=null)
+            {
+                this.buffer = this.buffer+s+"\n";
+            }
+            else
+            {
+                break;
+            }
+            i = i +s.length();
+        }
+
+    }
+    
+    public boolean bufferVazio()
+    {
+        //System.out.print("vazio = "+this.buffer.isEmpty());
+        return this.buffer.isEmpty();
+    }
+    
+    public char getNextChar()
+    {
+        char valor=this.buffer.charAt(0);
+        this.buffer = this.buffer.substring(1);
+        return valor;
+    }
+}
