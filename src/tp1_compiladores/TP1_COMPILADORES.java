@@ -17,7 +17,7 @@ public class TP1_COMPILADORES {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        AnalisadorLexico teste = new AnalisadorLexico("/home/lucas/teste.txt");
+        AnalisadorLexico teste = new AnalisadorLexico("teste.txt");
     }
     
 }
