@@ -19,6 +19,7 @@ public class Token {
         this.nome=nome;
         this.lexema=lexema;
         this.linha=linha;
+        //System.out.print("add token "+nome+" "+lexema+" "+linha);
     }
 
     public String getNome() {
