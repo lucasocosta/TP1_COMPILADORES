@@ -5,7 +5,9 @@
  */
 package tp1_compiladores;
 import analisadorLexico.*;
+import analisadorSintatico.AnalisadorSintatico;
 import java.io.IOException;
+import java.util.List;
 /**
  *
  * @author lucas
@@ -17,7 +19,10 @@ public class TP1_COMPILADORES {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        AnalisadorLexico teste = new AnalisadorLexico("teste.txt");
+        AnalisadorLexico lexico = new AnalisadorLexico("teste.txt");
+        List<Token> tokens;
+        tokens=lexico.getTokens();
+        AnalisadorSintatico sintatico = new AnalisadorSintatico(tokens);
     }
     
 }
