@@ -5,10 +5,16 @@
  */
 package analisadorSintatico;
 
+import analisadorLexico.Token;
+import java.util.List;
+
 /**
  *
  * @author thiag
  */
 public class AnalisadorSintatico {
-    
+    public AnalisadorSintatico(List<Token> tokens)
+    {
+        
+    }
 }
