@@ -31,7 +31,7 @@ public class AnalisadorLexico {
         palavras_reservadas = new HashMap<>();
         carregar_palavras();
         tokens = new ArrayList<>();
-        estado=0;
+        estado=1;
         linha=0;
         lexema="";
         
@@ -50,10 +50,11 @@ public class AnalisadorLexico {
             char c=entrada.getNextChar();
             
             computaChar(c);
+            //System.out.print(c);
         }
         for(int i=0;i<tokens.size();i++)
         {
-            System.out.print(tokens.get(i).getNome()+"linha: "+tokens.get(i).getLinha()+"\n");
+            System.out.print(tokens.get(i).getNome()+" "+tokens.get(i).getLexema() +" linha: "+tokens.get(i).getLinha()+"\n");
         }
         entrada.fechar_arquivo();
         
@@ -63,49 +64,157 @@ public class AnalisadorLexico {
     {
         
         switch(estado)
-        {
-            case 0:
-                if(c=='\n')
+        {       
+            case 1:
+                if(Character.isAlphabetic(c))
                 {
-                    linha++;
-                    estado=0;
-                }
-                else if(c==' ')
-                {
-                    
-                }
-                else if(Character.isAlphabetic(c))
-                {
-                    //System.out.print(" é alpha\n");
+                    estado=2;
+                    lexema+=c;
                 }
                 else if(Character.isDigit(c))
                 {
-                    //System.out.print(" é digito\n");
+                    estado=3;
+                    lexema+=c;
                 }
-                else
+                else if(c=='<')
+                {
+                    estado=6;
+                    lexema=""+c;
+                }
+                else if(c=='>')
+                {
+                    estado=7;
+                    lexema=""+c;
+                }
+                else if (c=='('||c==')'||c=='{'||c=='}'||c==','||c==';'||c=='+'||c=='-'||c=='*'||c=='/'||c=='='||c=='['||c==']')
                 {
                     lexema=""+c;
                     Token t = new Token(palavras_reservadas.get(lexema),lexema,linha);
                     tokens.add(t);
                     lexema="";
                 }
-                break;
-            case 1:
-                if(Character.isAlphabetic(c))
+                else if(c=='\n')
                 {
-                    estado=1;
-                    lexema+=c;
+                    linha++;
+                    lexema="";
                 }
-                else if(Character.isDigit(c))
+                else if(c=='\t'||c==' ')
                 {
-                    estado=1;
+                    lexema="";
+                }
+                break;
+            case 2:
+                if(Character.isAlphabetic(c)||Character.isDigit(c))
+                {
+                    estado=2;
                     lexema+=c;
                 }
                 else
                 {
-                    estado=0;
-                    lexema=""+c;
+                    estado=1;
+                    Token t;
+                    if(palavras_reservadas.get(lexema)!=null)
+                    {
+                        t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                    }
+                    else
+                    {
+                        t = new Token("ID",lexema,linha);
+                    }
+                    tokens.add(t);
+                    computaChar(c);
                 }
+                break;
+            case 3:
+                if(Character.isDigit(c))
+                {
+                    estado=3;
+                    lexema+=c;
+                }
+                else if(c=='.')
+                {
+                    estado=4;
+                    lexema+=c;
+                }
+                else
+                {
+                    estado=1;
+                    Token t;
+                    if(palavras_reservadas.get(lexema)!=null)
+                    {
+                        t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                    }
+                    else
+                    {
+                        t = new Token("INTEGER_CONST",lexema,linha);
+                    }
+                    tokens.add(t);
+                    computaChar(c);
+                }
+ 
+                break;
+            case 4:
+                if(Character.isDigit(c))
+                {
+                    estado=5;
+                    lexema+=c;
+                }
+                
+                break;
+            case 5:
+                
+                if(Character.isDigit(c))
+                {
+                    estado=5;
+                    lexema+=c;
+                }
+                else
+                {
+                    estado=1;
+                    Token t;
+                    if(palavras_reservadas.get(lexema)!=null)
+                    {
+                        t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                    }
+                    else
+                    {
+                        t = new Token("INTEGER_CONST",lexema,linha);
+                    }
+                    tokens.add(t);
+                    computaChar(c);
+                }
+                
+                break;
+            case 6:
+                if(c=='=')
+                {
+                    estado=1;
+                    lexema+=c;
+                    Token t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                }
+                else
+                {
+                    estado=1;
+                    Token t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                    computaChar(c);
+                }
+                
+                
+                break;
+            case 7:
+                if(c=='=')
+                {
+                    estado=1;
+                    lexema+=c;
+                    Token t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                }
+                else
+                {
+                    estado=1;
+                    Token t = new Token(palavras_reservadas.get(lexema),lexema,linha);
+                    computaChar(c);
+                }
+                
                 break;
          }
     }
