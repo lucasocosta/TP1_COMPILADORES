@@ -28,7 +28,7 @@ public class AnalisadorSintatico {
         tokens=new ArrayList<>();
         tokens.addAll(t);
         pos=0;
-        tam=t.size();
+        tam=tokens.size();
         System.out.print("tamanho: "+tam);
     }
     private void Match()

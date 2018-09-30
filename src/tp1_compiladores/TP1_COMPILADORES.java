@@ -26,9 +26,7 @@ public class TP1_COMPILADORES {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         AnalisadorLexico lexico = new AnalisadorLexico("teste.txt");
-        List<Token> tokens=new ArrayList<>();
-        tokens.addAll(lexico.getTokens());
-        AnalisadorSintatico sintatico = new AnalisadorSintatico(tokens);
+        AnalisadorSintatico sintatico = new AnalisadorSintatico(lexico.getTokens());
     }
     
 }
