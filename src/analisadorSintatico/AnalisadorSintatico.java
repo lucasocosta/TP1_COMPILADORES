@@ -14,11 +14,14 @@ import java.util.List;
  */
 public class AnalisadorSintatico {
     private List<Token> t;
+    private int pos;
+    private int tam;
     
     public AnalisadorSintatico(List<Token> t)
     {         
-      
-        
+        t=this.t;
+        pos=0;
+        tam=t.size();
     }
     private void Match()
     {
