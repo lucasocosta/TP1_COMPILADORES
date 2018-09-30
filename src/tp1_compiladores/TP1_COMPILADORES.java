@@ -8,6 +8,12 @@ import analisadorLexico.*;
 import analisadorSintatico.AnalisadorSintatico;
 import java.io.IOException;
 import java.util.List;
+import io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 /**
  *
  * @author lucas
@@ -20,8 +26,8 @@ public class TP1_COMPILADORES {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         AnalisadorLexico lexico = new AnalisadorLexico("teste.txt");
-        List<Token> tokens;
-        tokens=lexico.getTokens();
+        List<Token> tokens=new ArrayList<>();
+        tokens.addAll(lexico.getTokens());
         AnalisadorSintatico sintatico = new AnalisadorSintatico(tokens);
     }
     

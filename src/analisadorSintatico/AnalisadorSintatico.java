@@ -6,22 +6,30 @@
 package analisadorSintatico;
 
 import analisadorLexico.Token;
+import java.util.ArrayList;
 import java.util.List;
-
+import io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 /**
  *
  * @author thiag
  */
 public class AnalisadorSintatico {
-    private List<Token> t;
+    private List<Token> tokens;
     private int pos;
     private int tam;
     
     public AnalisadorSintatico(List<Token> t)
-    {         
-        t=this.t;
+    {   
+        tokens=new ArrayList<>();
+        tokens.addAll(t);
         pos=0;
         tam=t.size();
+        System.out.print("tamanho: "+tam);
     }
     private void Match()
     {
