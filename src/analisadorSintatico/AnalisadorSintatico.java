@@ -13,108 +13,115 @@ import java.util.List;
  * @author thiag
  */
 public class AnalisadorSintatico {
-    public AnalisadorSintatico(List<Token> tokens)
-    {
-        
-    }
+    private List<Token> t;
     
-    public void Programa(List<Token> tokens)
+    public AnalisadorSintatico(List<Token> t)
+    {         
+      
+        
+    }
+    private void Match()
+    {
+        
+        
+    }
+    private void Programa(List<Token> t)
     {
         
     }
-    public void Decl_Comando (List<Token> tokens)
+    private void Decl_Comando (List<Token> tokens)
     {
         
     }
-    public void Declaracao (List<Token> tokens)
+    private void Declaracao (List<Token> tokens)
     {
         
     }
-    public void Decl2 (List<Token> tokens)
+    private void Decl2 (List<Token> tokens)
     {
         
     }
-    public void Tipo (List<Token> tokens)
+    private void Tipo (List<Token> tokens)
     {
         
     }
-    public void Comando (List<Token> tokens)
+    private void Comando (List<Token> tokens)
     {
         
     }
-    public void Bloco (List<Token> tokens)
+    private void Bloco (List<Token> tokens)
     {
         
     }
-    public void Atribuicao (List<Token> tokens)
+    private void Atribuicao (List<Token> tokens)
     {
         
     }
-    public void ComandoSe (List<Token> tokens)
+    private void ComandoSe (List<Token> tokens)
     {
         
     }
-    public void ComandoSenao (List<Token> tokens)
+    private void ComandoSenao (List<Token> tokens)
     {
         
     }
-    public void ComandoEnquanto (List<Token> tokens)
+    private void ComandoEnquanto (List<Token> tokens)
     {
         
     }
-    public void ComandoRead (List<Token> tokens)
+    private void ComandoRead (List<Token> tokens)
     {
         
     }
-    public void ComandoPrint (List<Token> tokens)
+    private void ComandoPrint (List<Token> tokens)
     {
         
     }
-    public void ComandoFor (List<Token> tokens)
+    private void ComandoFor (List<Token> tokens)
     {
         
     }
-    public void AtribuicaoFor (List<Token> tokens)
+    private void AtribuicaoFor (List<Token> tokens)
     {
         
     }
-    public void Expressao (List<Token> tokens)
+    private void Expressao (List<Token> tokens)
     {
         
     }
-    public void RelacaoOpc (List<Token> tokens)
+    private void RelacaoOpc (List<Token> tokens)
     {
         
     }
-    public void OpRel (List<Token> tokens)
+    private void OpRel (List<Token> tokens)
     {
         
     }
-    public void Adicao (List<Token> tokens)
+    private void Adicao (List<Token> tokens)
     {
         
     }
-    public void AdicaoOpc (List<Token> tokens)
+    private void AdicaoOpc (List<Token> tokens)
     {
         
     }
-    public void OpAdicao (List<Token> tokens)
+    private void OpAdicao (List<Token> tokens)
     {
         
     }
-    public void Termo (List<Token> tokens)
+    private void Termo (List<Token> tokens)
     {
         
     }
-    public void TermoOpc (List<Token> tokens)
+    private void TermoOpc (List<Token> tokens)
     {
         
     }
-    public void OpMult (List<Token> tokens)
+    private void OpMult (List<Token> tokens)
     {
         
     }
-    public void Fator (List<Token> tokens)
+    private void Fator (List<Token> tokens)
     {
         
     }
