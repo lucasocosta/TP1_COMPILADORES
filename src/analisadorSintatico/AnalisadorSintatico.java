@@ -23,6 +23,7 @@ public class AnalisadorSintatico {
     private int pos;
     private int tam;
     
+    
     public AnalisadorSintatico(List<Token> t)
     {   
         tokens=new ArrayList<>();
@@ -31,9 +32,20 @@ public class AnalisadorSintatico {
         tam=tokens.size();
         System.out.print("tamanho: "+tam);
     }
-    private void Match()
+    private void Match(String tok)
     {
-        
+        if (tokens.get(pos).getNome()==tok)
+        {
+            System.out.print("Token "+tok+" reconhecido na entrada");
+            if(pos<tokens.size()-1)
+            {
+                pos++;
+            }
+            else
+            {
+                System.out.print("Token "+tok+" não esperado na entrada");
+            }
+        }
         
     }
     private void Programa(List<Token> t)
