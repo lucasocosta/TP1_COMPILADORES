@@ -34,7 +34,7 @@ public class AnalisadorSintatico {
     }
     private void Match(String tok)
     {
-        if (tokens.get(pos).getNome()==tok)
+        if (tokens.get(pos).getNome().equals(tok))
         {
             System.out.print("Token "+tok+" reconhecido na entrada");
             if(pos<tokens.size()-1)
