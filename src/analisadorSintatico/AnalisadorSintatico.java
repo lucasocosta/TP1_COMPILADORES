@@ -32,24 +32,26 @@ public class AnalisadorSintatico {
         pos=0;
         tam=tokens.size();
         System.out.print("tamanho: "+tam);
+        Programa();
     }
     private void Match(String tok)
     {
         if (tokens.get(pos).getNome().equals(tok))
         {
-            System.out.print("Token "+tok+" reconhecido na entrada");
+            System.out.print("Token "+tok+" reconhecido na entrada\n");
             if(pos<tokens.size()-1)
             {
                 pos++;
             }
-            else
-            {
-                System.out.print("Token "+tok+" não esperado na entrada");
-            }
+            
+        }
+        else
+        {
+            System.out.print("Token "+tok+" não esperado na entrada\n");
         }
         
     }
-    private void Programa(List<Token> tokens)
+    private void Programa()
     {
         System.out.println("INICIOU");
         Match("INT");
@@ -57,19 +59,19 @@ public class AnalisadorSintatico {
         Match("LBRACKET");
         Match("RBRACKET");
         Match("LBRACE");
-        Decl_Comando(tokens);
+        Decl_Comando();
         Match("LBRACE");
         if (tokens.get(pos).getNome().equals("EOF")) {
             Match("EOF");
             System.out.println("Fim da análise.");
         }
     }
-    private void Decl_Comando (List<Token> tokens)
+    private void Decl_Comando ()
     {
           if (tokens.get(pos).getNome().equals("INT") || tokens.get(pos).getNome().equals("FLOAT"))
           {
-               Declaracao(tokens);
-               Decl_Comando(tokens);
+               Declaracao();
+               Decl_Comando();
           }
           else if (tokens.get(pos).getNome().equals("LBRACE") ||
               tokens.get(pos).getNome().equals("ID") ||
@@ -78,20 +80,20 @@ public class AnalisadorSintatico {
               tokens.get(pos).getNome().equals("READ") ||
               tokens.get(pos).getNome().equals("PRINT"))
           {
-              Comando(tokens);
-              Decl_Comando(tokens);               
+              Comando();
+              Decl_Comando();               
           }
           else {
 //              vazio
           }          
     }
-    private void Declaracao (List<Token> tokens)
+    private void Declaracao ()
     {
-        Tipo(tokens);
+        Tipo();
         Match("ID");
-        Decl2(tokens);        
+        Decl2();        
     }
-    private void Tipo (List<Token> tokens)
+    private void Tipo ()
     {
         if (tokens.get(pos).getNome().equals("INT")){
             Match("INT");
@@ -103,139 +105,139 @@ public class AnalisadorSintatico {
         }   
         
     }
-    private void Decl2 (List<Token> tokens)
+    private void Decl2 ()
     {
         if (tokens.get(pos).getNome().equals("COMMA")){
             Match("COMMA");
             Match("ID");
-            Decl2(tokens);
+            Decl2();
         }
         else if (tokens.get(pos).getNome().equals("PCOMMA")){
             Match("PCOMMA");
         }
         else if (tokens.get(pos).getNome().equals("ATTR")) {
             Match("ATTR");
-            Expressao(tokens);
-            Decl2(tokens);
+            Expressao();
+            Decl2();
         }
     }
-    private void Comando (List<Token> tokens)
+    private void Comando ()
     {
         if (tokens.get(pos).getNome().equals("LBRACE")){
-            Bloco(tokens);
+            Bloco();
         }
         else if (tokens.get(pos).getNome().equals("ID")){
-            Atribuicao(tokens);
+            Atribuicao();
         }
         else if (tokens.get(pos).getNome().equals("IF")){
-            ComandoSe(tokens);
+            ComandoSe();
         }
         else if (tokens.get(pos).getNome().equals("WHILE")){
-            ComandoEnquanto(tokens);
+            ComandoEnquanto();
         }
         else if (tokens.get(pos).getNome().equals("READ")){
-            ComandoRead(tokens);
+            ComandoRead();
         }
         else if (tokens.get(pos).getNome().equals("PRINT")){
-            ComandoPrint(tokens);
+            ComandoPrint();
         }
         else if (tokens.get(pos).getNome().equals("FOR")){
-            ComandoFor(tokens);
+            ComandoFor();
         }  
     }
-    private void Bloco (List<Token> tokens)
+    private void Bloco ()
     {
         Match("LBRACE");
-        Decl_Comando(tokens);
+        Decl_Comando();
         Match("RBRACE");
     }
-    private void Atribuicao (List<Token> tokens)
+    private void Atribuicao ()
     {
         Match("ID");
         Match("ATTR");
-        Expressao(tokens);
+        Expressao();
         Match("PCOMMA");
     }
-    private void ComandoSe (List<Token> tokens)
+    private void ComandoSe ()
     {
         Match("ID");
         Match("LBRACKET");
-        Expressao(tokens);
+        Expressao();
         Match("RBRACKET");
-        Comando(tokens);
-        ComandoSenao(tokens);
+        Comando();
+        ComandoSenao();
     }
-    private void ComandoSenao (List<Token> tokens)
+    private void ComandoSenao ()
     {
         if (tokens.get(pos).getNome().equals("ELSE")){
             Match("ELSE");
-            Comando(tokens);
+            Comando();
         }
         else {
             
         }
     }
-    private void ComandoEnquanto (List<Token> tokens)
+    private void ComandoEnquanto ()
     {
         Match("WHILE");
         Match("LBRACKET");
-        Expressao(tokens);
+        Expressao();
         Match("RBRACKET");
-        Comando(tokens);
+        Comando();
     }
-    private void ComandoRead (List<Token> tokens)
+    private void ComandoRead ()
     {
         Match("READ");
         Match("ID");
         Match("PCOMMA");
     }
-    private void ComandoPrint (List<Token> tokens)
+    private void ComandoPrint ()
     {
         Match("PRINT");
         Match("LBRACKET");
-        Expressao(tokens);
+        Expressao();
         Match("RBRACKET");
         Match("PCOMMA");
     }
-    private void ComandoFor (List<Token> tokens)
+    private void ComandoFor ()
     {
         Match("FOR");
         Match("LBRACKET");
-        AtribuicaoFor(tokens);
+        AtribuicaoFor();
         Match("PCOMMA");
-        Expressao(tokens);
+        Expressao();
         Match("PCOMMA");
-        AtribuicaoFor(tokens);
+        AtribuicaoFor();
         Match("RBRACKET");
-        Comando(tokens);
+        Comando();
     }
-    private void AtribuicaoFor (List<Token> tokens)
+    private void AtribuicaoFor ()
     {
         Match("ID");
         Match("ATTR");
-        Expressao(tokens);
+        Expressao();
     }
-    private void Expressao (List<Token> tokens)
+    private void Expressao ()
     {
-        Adicao(tokens);
-        RelacaoOpc(tokens);
+        Adicao();
+        RelacaoOpc();
     }
-    private void RelacaoOpc (List<Token> tokens)
+    private void RelacaoOpc ()
     {
         if (tokens.get(pos).getNome().equals("LT") ||
             tokens.get(pos).getNome().equals("LE") ||
             tokens.get(pos).getNome().equals("GT") ||
             tokens.get(pos).getNome().equals("GE")){
             
-            OpRel(tokens);
-            Adicao(tokens);
-            RelacaoOpc(tokens);
+            OpRel();
+            Adicao();
+            RelacaoOpc();
         }
         else {
       
         } 
     }
-    private void OpRel (List<Token> tokens)
+    private void OpRel ()
     {
         if (tokens.get(pos).getNome().equals("LT")){
             Match("LT");
@@ -250,24 +252,24 @@ public class AnalisadorSintatico {
             Match("GE");
         }
     }
-    private void Adicao (List<Token> tokens)
+    private void Adicao ()
     {
-        Termo(tokens);
-        AdicaoOpc(tokens);
+        Termo();
+        AdicaoOpc();
     }
-    private void AdicaoOpc (List<Token> tokens)
+    private void AdicaoOpc ()
     {
         if (tokens.get(pos).getNome().equals("PLUS") ||
             tokens.get(pos).getNome().equals("MINUS")){
-            OpAdicao(tokens);
-            Termo(tokens);
-            AdicaoOpc(tokens);
+            OpAdicao();
+            Termo();
+            AdicaoOpc();
         }
         else {
             
         }
     }
-    private void OpAdicao (List<Token> tokens)
+    private void OpAdicao ()
     {
         if (tokens.get(pos).getNome().equals("PLUS")){
             Match("PLUS");
@@ -276,24 +278,24 @@ public class AnalisadorSintatico {
             Match("MINUS");
         }        
     }
-    private void Termo (List<Token> tokens)
+    private void Termo ()
     {
-        Fator(tokens);
-        TermoOpc(tokens);
+        Fator();
+        TermoOpc();
     }
-    private void TermoOpc (List<Token> tokens)
+    private void TermoOpc ()
     {
         if (tokens.get(pos).getNome().equals("MULT") ||
             tokens.get(pos).getNome().equals("DIV")){
-            OpMult(tokens);
-            Fator(tokens);
-            TermoOpc(tokens);
+            OpMult();
+            Fator();
+            TermoOpc();
         }
         else {
             
         }
     }
-    private void OpMult (List<Token> tokens)
+    private void OpMult ()
     {
         if (tokens.get(pos).getNome().equals("MULT")){
             Match("MUlT");
@@ -303,7 +305,7 @@ public class AnalisadorSintatico {
         } 
         
     }
-    private void Fator (List<Token> tokens)
+    private void Fator ()
     {
         if (tokens.get(pos).getNome().equals("ID")){
             Match("ID");
@@ -316,12 +318,8 @@ public class AnalisadorSintatico {
         }
         else if (tokens.get(pos).getNome().equals("LBRACKET")){
             Match("LBRACKET");
-            Expressao(tokens);
+            Expressao();
             Match("RBRACKET");
         } 
-    }
-    
-    public AnalisadorSintatico(){
-        Programa(tokens);
     }
 }
