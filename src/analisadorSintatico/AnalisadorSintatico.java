@@ -60,9 +60,9 @@ public class AnalisadorSintatico {
         Match("RBRACKET");
         Match("LBRACE");
         Decl_Comando();
-        Match("LBRACE");
-        if (tokens.get(pos).getNome().equals("EOF")) {
-            Match("EOF");
+        Match("RBRACE");
+        if (pos==tokens.size()-1) {
+            //Match("EOF");
             System.out.println("Fim da análise.");
         }
     }
@@ -160,7 +160,7 @@ public class AnalisadorSintatico {
     }
     private void ComandoSe ()
     {
-        Match("ID");
+        Match("IF");
         Match("LBRACKET");
         Expressao();
         Match("RBRACKET");
