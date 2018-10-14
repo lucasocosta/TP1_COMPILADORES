@@ -15,23 +15,23 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.String;
-import analisadorSintatico.Simbolo;
 /**
  *
  * @author thiag
  */
 public class AnalisadorSintatico {
     private List<Token> tokens;
-    private List<Simbolo> tabelaSimbolos;
     private int pos;
     private int tam;
+    private Simbolo s;
+    private TabelaSimbolos TabSimbolo;
     
     
     public AnalisadorSintatico(List<Token> t)
     {   
+        TabSimbolo= new TabelaSimbolos();
         tokens=new ArrayList<>();
         tokens.addAll(t);
-        tabelaSimbolos=new ArrayList<>();
         pos=0;
         tam=tokens.size();
         System.out.print("Tamanho da lista de tokens: "+tam);
@@ -93,17 +93,23 @@ public class AnalisadorSintatico {
     }
     private void Declaracao ()
     {
+        s=new Simbolo();
         Tipo();
+        s.setLexema(tokens.get(pos).getLexema());
+        s.setLinha(tokens.get(pos).getLinha());
         Match("ID");
+        s.setValor(null);
         Decl2();        
     }
     private void Tipo ()
     {
         if (tokens.get(pos).getNome().equals("INT")){
+            s.setTipo(tokens.get(pos).getNome());
             Match("INT");
 //          altera tipo para lista
         }
         else if (tokens.get(pos).getNome().equals("FLOAT")){
+            s.setTipo(tokens.get(pos).getNome());
             Match("FLOAT");
 //          altera tipo para lista
         }   
@@ -112,11 +118,18 @@ public class AnalisadorSintatico {
     private void Decl2 ()
     {
         if (tokens.get(pos).getNome().equals("COMMA")){
+            TabSimbolo.adicionaSimbolo(s);
             Match("COMMA");
+            s = new Simbolo();
+            s.setTipo(TabSimbolo.ultimoSimbolo().getTipo());
+            s.setValor(null);
+            s.setLinha(tokens.get(pos).getLinha());
+            s.setLexema(tokens.get(pos).getLexema());
             Match("ID");
             Decl2();
         }
         else if (tokens.get(pos).getNome().equals("PCOMMA")){
+            TabSimbolo.adicionaSimbolo(s);
             Match("PCOMMA");
         }
         else if (tokens.get(pos).getNome().equals("ATTR")) {
