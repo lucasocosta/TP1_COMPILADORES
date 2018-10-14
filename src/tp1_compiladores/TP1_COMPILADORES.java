@@ -14,6 +14,7 @@ import java.util.List;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import io.*;
 /**
  *
  * @author lucas
@@ -27,6 +28,9 @@ public class TP1_COMPILADORES {
         // TODO code application logic here
         AnalisadorLexico lexico = new AnalisadorLexico("teste.txt");
         AnalisadorSintatico sintatico = new AnalisadorSintatico(lexico.getTokens());
+        io saida=new io();
+        saida.tabSimbolos("tabSim.txt", sintatico.getTabelaSimbolos());
+        
     }
     
 }
