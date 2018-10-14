@@ -37,6 +37,13 @@ public class AnalisadorSintatico {
         System.out.print("Tamanho da lista de tokens: "+tam);
         System.out.print("\nComeço da analise Sintática\n");
         Programa();
+        System.out.print("\nTabela de Simbolos\nLex\tTipo\tValor\tLinha\n");
+        for(int i=0;i<TabSimbolo.tamanho();i++)
+        {
+            System.out.print(TabSimbolo.get(i).getLexema()+"\t"+TabSimbolo.get(i).getTipo()+"\t"+
+                    TabSimbolo.get(i).getValor()+"\t"+TabSimbolo.get(i).getLinha()+"\n");
+        }
+        
     }
     private void Match(String tok)
     {
