@@ -347,4 +347,8 @@ public class AnalisadorSintatico {
             Match("RBRACKET");
         } 
     }
+    public TabelaSimbolos getTabelaSimbolos()
+    {
+        return TabSimbolo;
+    }
 }

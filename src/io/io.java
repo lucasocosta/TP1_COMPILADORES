@@ -20,6 +20,7 @@ public class io {
     private FileReader fr;
     private BufferedReader bfr;
     
+    
     public io(String arquivo) throws IOException
     {
         this.arquivo=arquivo;
