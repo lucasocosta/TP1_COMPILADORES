@@ -34,7 +34,7 @@ public class AnalisadorLexico {
         estado=1;
         linha=0;
         lexema="";
-        
+        System.out.print("Começo da analise Lexica\n");
         while(true)
         {
             if(entrada.bufferVazio())
@@ -56,6 +56,7 @@ public class AnalisadorLexico {
         {
             System.out.print(tokens.get(i).getNome()+" "+tokens.get(i).getLexema() +" linha: "+tokens.get(i).getLinha()+"\n");
         }
+        System.out.print("\nFim da analise Lexica\n");
         entrada.fechar_arquivo();
         
     }

@@ -15,12 +15,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.String;
+import analisadorSintatico.Simbolo;
 /**
  *
  * @author thiag
  */
 public class AnalisadorSintatico {
     private List<Token> tokens;
+    private List<Simbolo> tabelaSimbolos;
     private int pos;
     private int tam;
     
@@ -29,9 +31,11 @@ public class AnalisadorSintatico {
     {   
         tokens=new ArrayList<>();
         tokens.addAll(t);
+        tabelaSimbolos=new ArrayList<>();
         pos=0;
         tam=tokens.size();
-        System.out.print("tamanho: "+tam);
+        System.out.print("Tamanho da lista de tokens: "+tam);
+        System.out.print("\nComeço da analise Sintática\n");
         Programa();
     }
     private void Match(String tok)
@@ -63,7 +67,7 @@ public class AnalisadorSintatico {
         Match("RBRACE");
         if (pos==tokens.size()-1) {
             //Match("EOF");
-            System.out.println("Fim da análise.");
+            System.out.println("Fim da análise sintática");
         }
     }
     private void Decl_Comando ()
