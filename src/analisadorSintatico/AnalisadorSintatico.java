@@ -142,6 +142,7 @@ public class AnalisadorSintatico {
         else if (tokens.get(pos).getNome().equals("ATTR")) {
             Match("ATTR");
             Expressao();
+            s.setValor(tokens.get(pos-1).getLexema());
             Decl2();
         }
     }
