@@ -27,5 +27,13 @@ public class TabelaSimbolos {
     {
         return tabelaSimbolos.get(tabelaSimbolos.size()-1);
     }
+    public int tamanho()
+    {
+        return tabelaSimbolos.size();
+    }
+    public Simbolo get(int i)
+    {
+        return tabelaSimbolos.get(i);
+    }
     
 }
