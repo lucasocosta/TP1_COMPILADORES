@@ -32,8 +32,8 @@ public class TP1_COMPILADORES {
         
         AnalisadorLexico lexico = new AnalisadorLexico(nomeArquivo);
         AnalisadorSintatico sintatico = new AnalisadorSintatico(lexico.getTokens());
-        //io saida=new io();
-        //saida.tabSimbolos("tabSim.txt", sintatico.getTabelaSimbolos());
+        io saida=new io();
+        saida.tabSimbolos(nomeArquivo+"_tabSim.txt", sintatico.getTabelaSimbolos());
         
     }
     

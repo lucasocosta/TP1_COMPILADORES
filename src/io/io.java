@@ -41,7 +41,6 @@ public class io {
     
     public void tabSimbolos(String arquivo, TabelaSimbolos tabSimbolos) throws IOException
     {
-        arquivo=this.arquivo;
         fw = new FileWriter(arquivo);
         PrintWriter pw = new PrintWriter(fw);
         pw.print("\nTabela de Simbolos\nLex\tTipo\tValor\tLinha\n");
