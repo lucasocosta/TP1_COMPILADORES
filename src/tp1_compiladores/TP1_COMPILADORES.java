@@ -26,10 +26,14 @@ public class TP1_COMPILADORES {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        AnalisadorLexico lexico = new AnalisadorLexico("teste.txt");
+        String nomeArquivo;
+        //nomeArquivo="teste.txt";
+        nomeArquivo=args[0];
+        
+        AnalisadorLexico lexico = new AnalisadorLexico(nomeArquivo);
         AnalisadorSintatico sintatico = new AnalisadorSintatico(lexico.getTokens());
-        io saida=new io();
-        saida.tabSimbolos("tabSim.txt", sintatico.getTabelaSimbolos());
+        //io saida=new io();
+        //saida.tabSimbolos("tabSim.txt", sintatico.getTabelaSimbolos());
         
     }
     
