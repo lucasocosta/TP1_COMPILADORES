@@ -4,6 +4,16 @@ int main()
     int b=2,c;
     if(a<=b)
         a=2;
-    else if(a>b)
+    else
         a=1;
+
+  int x = 0, y = 1;
+  x = 3 * 2;
+  y = 2 >= x > y <= x;
+    for(x=1;x<10;x=x+1)
+    {
+        print("teste");
+    }
+
+
 }

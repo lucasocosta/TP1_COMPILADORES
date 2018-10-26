@@ -89,7 +89,8 @@ public class AnalisadorSintatico {
               tokens.get(pos).getNome().equals("IF") ||
               tokens.get(pos).getNome().equals("WHILE") ||
               tokens.get(pos).getNome().equals("READ") ||
-              tokens.get(pos).getNome().equals("PRINT"))
+              tokens.get(pos).getNome().equals("PRINT")||
+              tokens.get(pos).getNome().equals("FOR"))
           {
               Comando();
               Decl_Comando();               
@@ -323,7 +324,7 @@ public class AnalisadorSintatico {
     private void OpMult ()
     {
         if (tokens.get(pos).getNome().equals("MULT")){
-            Match("MUlT");
+            Match("MULT");
         }
         else if (tokens.get(pos).getNome().equals("DIV")){
             Match("DIV");
