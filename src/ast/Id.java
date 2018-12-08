@@ -13,7 +13,7 @@ public class Id extends No{
     
     public Id(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo Id");
+        System.out.print("Criando no do tipo Id "+nome+"\n");
     }
     
 }

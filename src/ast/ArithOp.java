@@ -9,7 +9,7 @@ package ast;
  *
  * @author lucas
  */
-public class ArithOp extends No{
+public class ArithOp extends Expr{
     
     public ArithOp(String nome) {
         super(nome);

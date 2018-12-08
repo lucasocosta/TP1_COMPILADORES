@@ -23,6 +23,7 @@ abstract public class No {
         this.nome=nome;
         this.tipo=null;
         this.valor=null;
+        filhos=new ArrayList<>();
         
     }
 

@@ -9,11 +9,10 @@ package ast;
  *
  * @author lucas
  */
-public class RelOp extends Expr{
+public class Bloco extends No{
     
-    public RelOp(String nome) {
+    public Bloco(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo RelOp");
-    }
-    
+        System.out.print("Criando no do tipo Bloco\n");
+    }    
 }

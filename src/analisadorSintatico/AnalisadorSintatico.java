@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.String;
+import ast.*;
 /**
  *
  * @author thiag
@@ -25,10 +26,12 @@ public class AnalisadorSintatico {
     private int tam;
     private Simbolo s;
     private TabelaSimbolos TabSimbolo;
+    private AST ast;
     
     
     public AnalisadorSintatico(List<Token> t)
     {   
+        ast = new AST();
         TabSimbolo= new TabelaSimbolos();
         tokens=new ArrayList<>();
         tokens.addAll(t);
@@ -70,19 +73,23 @@ public class AnalisadorSintatico {
         Match("LBRACKET");
         Match("RBRACKET");
         Match("LBRACE");
-        Decl_Comando();
+        Bloco main = new Bloco("MAIN");
+        ast.setRaiz(main);
+        Decl_Comando(main);
         Match("RBRACE");
         if (pos==tokens.size()-1) {
             //Match("EOF");
             System.out.println("Fim da análise sintática");
         }
     }
-    private void Decl_Comando ()
+    private void Decl_Comando (No no)
     {
+          System.out.print("Decl_comando recebeu "+no.getNome()+"\n");
           if (tokens.get(pos).getNome().equals("INT") || tokens.get(pos).getNome().equals("FLOAT"))
           {
-               Declaracao();
-               Decl_Comando();
+               Declaracao(no);
+               
+               Decl_Comando(no);
           }
           else if (tokens.get(pos).getNome().equals("LBRACE") ||
               tokens.get(pos).getNome().equals("ID") ||
@@ -92,14 +99,14 @@ public class AnalisadorSintatico {
               tokens.get(pos).getNome().equals("PRINT")||
               tokens.get(pos).getNome().equals("FOR"))
           {
-              Comando();
-              Decl_Comando();               
+              Comando(no);
+              Decl_Comando(no);               
           }
           else {
 //              vazio
           }          
     }
-    private void Declaracao ()
+    private void Declaracao (No no)
     {
         s=new Simbolo();
         Tipo();
@@ -107,7 +114,7 @@ public class AnalisadorSintatico {
         s.setLinha(tokens.get(pos).getLinha());
         Match("ID");
         s.setValor(null);
-        Decl2();        
+        Decl2(no);        
     }
     private void Tipo ()
     {
@@ -123,7 +130,7 @@ public class AnalisadorSintatico {
         }   
         
     }
-    private void Decl2 ()
+    private void Decl2 (No no)
     {
         if (tokens.get(pos).getNome().equals("COMMA")){
             TabSimbolo.adicionaSimbolo(s);
@@ -134,136 +141,140 @@ public class AnalisadorSintatico {
             s.setLinha(tokens.get(pos).getLinha());
             s.setLexema(tokens.get(pos).getLexema());
             Match("ID");
-            Decl2();
+            Decl2(no);
         }
         else if (tokens.get(pos).getNome().equals("PCOMMA")){
             TabSimbolo.adicionaSimbolo(s);
             Match("PCOMMA");
         }
         else if (tokens.get(pos).getNome().equals("ATTR")) {
+            Attr at=new Attr("Attr");
+            no.addFilho(at);
+            Id id=new Id(tokens.get(pos-1).getLexema());
+            at.addFilho(id);
             Match("ATTR");
-            Expressao();
+            Expressao(at);
             s.setValor(tokens.get(pos-1).getLexema());
-            Decl2();
+            Decl2(no);
         }
     }
-    private void Comando ()
+    private void Comando (No no)
     {
         if (tokens.get(pos).getNome().equals("LBRACE")){
-            Bloco();
+            Bloco(new Bloco(""));
         }
         else if (tokens.get(pos).getNome().equals("ID")){
-            Atribuicao();
+            Atribuicao(no);
         }
         else if (tokens.get(pos).getNome().equals("IF")){
-            ComandoSe();
+            ComandoSe(no);
         }
         else if (tokens.get(pos).getNome().equals("WHILE")){
-            ComandoEnquanto();
+            ComandoEnquanto(no);
         }
         else if (tokens.get(pos).getNome().equals("READ")){
-            ComandoRead();
+            ComandoRead(no);
         }
         else if (tokens.get(pos).getNome().equals("PRINT")){
-            ComandoPrint();
+            ComandoPrint(no);
         }
         else if (tokens.get(pos).getNome().equals("FOR")){
-            ComandoFor();
+            ComandoFor(no);
         }  
     }
-    private void Bloco ()
+    private void Bloco (No no)
     {
         Match("LBRACE");
-        Decl_Comando();
+        Decl_Comando(no);
         Match("RBRACE");
     }
-    private void Atribuicao ()
+    private void Atribuicao (No no)
     {
         Match("ID");
         Match("ATTR");
-        Expressao();
+        Expressao(no);
         Match("PCOMMA");
     }
-    private void ComandoSe ()
+    private void ComandoSe (No no)
     {
         Match("IF");
         Match("LBRACKET");
-        Expressao();
+        Expressao(no);
         Match("RBRACKET");
-        Comando();
-        ComandoSenao();
+        Comando(no);
+        ComandoSenao(no);
     }
-    private void ComandoSenao ()
+    private void ComandoSenao (No no)
     {
         if (tokens.get(pos).getNome().equals("ELSE")){
             Match("ELSE");
-            Comando();
+            Comando(no);
         }
         else {
             
         }
     }
-    private void ComandoEnquanto ()
+    private void ComandoEnquanto (No no)
     {
         Match("WHILE");
         Match("LBRACKET");
-        Expressao();
+        Expressao(no);
         Match("RBRACKET");
-        Comando();
+        Comando(no);
     }
-    private void ComandoRead ()
+    private void ComandoRead (No no)
     {
         Match("READ");
         Match("ID");
         Match("PCOMMA");
     }
-    private void ComandoPrint ()
+    private void ComandoPrint (No no)
     {
         Match("PRINT");
         Match("LBRACKET");
-        Expressao();
+        Expressao(no);
         Match("RBRACKET");
         Match("PCOMMA");
     }
-    private void ComandoFor ()
+    private void ComandoFor (No no)
     {
         Match("FOR");
         Match("LBRACKET");
-        AtribuicaoFor();
+        AtribuicaoFor(no);
         Match("PCOMMA");
-        Expressao();
+        Expressao(no);
         Match("PCOMMA");
-        AtribuicaoFor();
+        AtribuicaoFor(no);
         Match("RBRACKET");
-        Comando();
+        Comando(no);
     }
-    private void AtribuicaoFor ()
+    private void AtribuicaoFor (No no)
     {
         Match("ID");
         Match("ATTR");
-        Expressao();
+        Expressao(no);
     }
-    private void Expressao ()
+    private void Expressao (No no)
     {
-        Adicao();
-        RelacaoOpc();
+        Adicao(no);
+        RelacaoOpc(no);
     }
-    private void RelacaoOpc ()
+    private void RelacaoOpc (No no)
     {
         if (tokens.get(pos).getNome().equals("LT") ||
             tokens.get(pos).getNome().equals("LE") ||
             tokens.get(pos).getNome().equals("GT") ||
             tokens.get(pos).getNome().equals("GE")){
             
-            OpRel();
-            Adicao();
-            RelacaoOpc();
+            OpRel(no);
+            Adicao(no);
+            RelacaoOpc(no);
         }
         else {
       
         } 
     }
-    private void OpRel ()
+    private void OpRel (No no)
     {
         if (tokens.get(pos).getNome().equals("LT")){
             Match("LT");
@@ -278,24 +289,24 @@ public class AnalisadorSintatico {
             Match("GE");
         }
     }
-    private void Adicao ()
+    private void Adicao (No no)
     {
-        Termo();
-        AdicaoOpc();
+        Termo(no);
+        AdicaoOpc(no);
     }
-    private void AdicaoOpc ()
+    private void AdicaoOpc (No no)
     {
         if (tokens.get(pos).getNome().equals("PLUS") ||
             tokens.get(pos).getNome().equals("MINUS")){
-            OpAdicao();
-            Termo();
-            AdicaoOpc();
+            OpAdicao(no);
+            Termo(no);
+            AdicaoOpc(no);
         }
         else {
             
         }
     }
-    private void OpAdicao ()
+    private void OpAdicao (No no)
     {
         if (tokens.get(pos).getNome().equals("PLUS")){
             Match("PLUS");
@@ -304,24 +315,24 @@ public class AnalisadorSintatico {
             Match("MINUS");
         }        
     }
-    private void Termo ()
+    private void Termo (No no)
     {
-        Fator();
-        TermoOpc();
+        Fator(no);
+        TermoOpc(no);
     }
-    private void TermoOpc ()
+    private void TermoOpc (No no)
     {
         if (tokens.get(pos).getNome().equals("MULT") ||
             tokens.get(pos).getNome().equals("DIV")){
-            OpMult();
-            Fator();
-            TermoOpc();
+            OpMult(no);
+            Fator(no);
+            TermoOpc(no);
         }
         else {
             
         }
     }
-    private void OpMult ()
+    private void OpMult (No no)
     {
         if (tokens.get(pos).getNome().equals("MULT")){
             Match("MULT");
@@ -331,7 +342,7 @@ public class AnalisadorSintatico {
         } 
         
     }
-    private void Fator ()
+    private void Fator (No no)
     {
         if (tokens.get(pos).getNome().equals("ID")){
             Match("ID");
@@ -344,7 +355,7 @@ public class AnalisadorSintatico {
         }
         else if (tokens.get(pos).getNome().equals("LBRACKET")){
             Match("LBRACKET");
-            Expressao();
+            //Expressao();
             Match("RBRACKET");
         } 
     }

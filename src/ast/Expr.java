@@ -9,11 +9,22 @@ package ast;
  *
  * @author lucas
  */
-public class Expr extends No{
+public abstract class Expr extends No{
+    
+    String op;
     
     public Expr(String nome) {
         super(nome);
         System.out.print("Criando no do tipo Expr");
     }
+
+    public String getOp() {
+        return op;
+    }
+
+    public void setOp(String op) {
+        this.op = op;
+    }
+    
     
 }

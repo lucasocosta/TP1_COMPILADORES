@@ -9,7 +9,7 @@ package ast;
  *
  * @author lucas
  */
-public class LogicalOp extends No{
+public class LogicalOp extends Expr{
     
     public LogicalOp(String nome) {
         super(nome);
