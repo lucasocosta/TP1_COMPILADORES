@@ -11,4 +11,16 @@ package ast;
  */
 public class AST {
     
+    No raiz;
+    
+    public AST()
+    {
+        
+    }
+    
+    public void setRaiz(No root)
+    {
+        raiz=root;
+    }
+    
 }

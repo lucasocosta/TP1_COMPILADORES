@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/analisadorLexico/Token.java</file>
-            <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/ast/If.java</file>
             <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/ast/No.java</file>
-            <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/ast/Attr.java</file>
+            <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/ast/Num.java</file>
             <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/analisadorSintatico/AnalisadorSintatico.java</file>
-            <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/analisadorSintatico/TabelaSimbolos.java</file>
-            <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/analisadorSintatico/Simbolo.java</file>
-            <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/ast/AST.java</file>
+            <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/ast/ArithOp.java</file>
+            <file>file:/home/lucas/NetBeansProjects/TP1_COMPILADORES/src/ast/Print.java</file>
         </group>
     </open-files>
 </project-private>
