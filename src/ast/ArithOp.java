@@ -13,7 +13,7 @@ public class ArithOp extends Expr{
     
     public ArithOp(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo ArithOp");
+        System.out.print("Criando no do tipo ArithOp\n");
     }
     
 }

@@ -13,7 +13,7 @@ public class Print extends No{
     
     public Print(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo Print");
+        System.out.print("Criando no do tipo Print\n");
     }
     
 }

@@ -52,7 +52,7 @@ public class AnalisadorSintatico {
     {
         if (tokens.get(pos).getNome().equals(tok))
         {
-            System.out.print("Token "+tok+" reconhecido na entrada\n");
+            //System.out.print("Token "+tok+" reconhecido na entrada\n");
             if(pos<tokens.size()-1)
             {
                 pos++;
@@ -61,7 +61,7 @@ public class AnalisadorSintatico {
         }
         else
         {
-            System.out.print("Token "+tok+" não esperado na entrada\n");
+            //System.out.print("Token "+tok+" não esperado na entrada\n");
         }
         
     }
@@ -150,7 +150,8 @@ public class AnalisadorSintatico {
         else if (tokens.get(pos).getNome().equals("ATTR")) {
             Attr at=new Attr("Attr");
             no.addFilho(at);
-            Id id=new Id(tokens.get(pos-1).getLexema());
+            Id id=new Id("ID");
+            id.setLexema(tokens.get(pos-1).getLexema());
             at.addFilho(id);
             Match("ATTR");
             Expressao(at);
@@ -161,7 +162,7 @@ public class AnalisadorSintatico {
     private void Comando (No no)
     {
         if (tokens.get(pos).getNome().equals("LBRACE")){
-            Bloco(new Bloco(""));
+            Bloco(no);
         }
         else if (tokens.get(pos).getNome().equals("ID")){
             Atribuicao(no);
@@ -197,9 +198,11 @@ public class AnalisadorSintatico {
     }
     private void ComandoSe (No no)
     {
+        If if_no = new If("If");
         Match("IF");
         Match("LBRACKET");
-        Expressao(no);
+        Expressao(if_no);
+        
         Match("RBRACKET");
         Comando(no);
         ComandoSenao(no);
@@ -258,6 +261,7 @@ public class AnalisadorSintatico {
     {
         Adicao(no);
         RelacaoOpc(no);
+        
     }
     private void RelacaoOpc (No no)
     {
@@ -265,36 +269,42 @@ public class AnalisadorSintatico {
             tokens.get(pos).getNome().equals("LE") ||
             tokens.get(pos).getNome().equals("GT") ||
             tokens.get(pos).getNome().equals("GE")){
-            
-            OpRel(no);
-            Adicao(no);
-            RelacaoOpc(no);
+            RelOp relop = new RelOp("RelOp");
+            OpRel(relop);
+            Adicao(relop);
+            RelacaoOpc(relop);
         }
         else {
       
         } 
     }
-    private void OpRel (No no)
+    private void OpRel (Expr no)
     {
         if (tokens.get(pos).getNome().equals("LT")){
             Match("LT");
+            no.setOp("<");
         }
         else if (tokens.get(pos).getNome().equals("LE")){
             Match("LE");
+            no.setOp("<=");
         }
         else if (tokens.get(pos).getNome().equals("GT")){
             Match("GT");
+            no.setOp(">");
         }
         else if (tokens.get(pos).getNome().equals("GE")){
             Match("GE");
+            no.setOp(">=");
         }
     }
     private void Adicao (No no)
     {
-        Termo(no);
-        AdicaoOpc(no);
+        ArithOp ar = new ArithOp("ArithOp");
+        Termo(ar);
+        AdicaoOpc(ar);
+        no.addFilho(ar);
     }
-    private void AdicaoOpc (No no)
+    private void AdicaoOpc (Expr no)
     {
         if (tokens.get(pos).getNome().equals("PLUS") ||
             tokens.get(pos).getNome().equals("MINUS")){
@@ -306,13 +316,16 @@ public class AnalisadorSintatico {
             
         }
     }
-    private void OpAdicao (No no)
+    private void OpAdicao (Expr no)
     {
         if (tokens.get(pos).getNome().equals("PLUS")){
             Match("PLUS");
+            no.setOp("+");
+            
         }
         else if (tokens.get(pos).getNome().equals("MINUS")){
             Match("MINUS");
+            no.setOp("-");
         }        
     }
     private void Termo (No no)
@@ -345,17 +358,26 @@ public class AnalisadorSintatico {
     private void Fator (No no)
     {
         if (tokens.get(pos).getNome().equals("ID")){
+            Id id=new Id("ID");
+            id.setLexema(tokens.get(pos).getLexema());
+            no.addFilho(id);
             Match("ID");
         }
         else if (tokens.get(pos).getNome().equals("INTEGER_CONST")){
+            Num num = new Num("Num");
+            num.setValor(tokens.get(pos).getLexema());
+            no.addFilho(num);
             Match("INTEGER_CONST");
         } 
         else if (tokens.get(pos).getNome().equals("FLOAT_CONST")){
+            Num num = new Num("Num");
+            num.setValor(tokens.get(pos).getLexema());
+            no.addFilho(num);
             Match("FLOAT_CONST");
         }
         else if (tokens.get(pos).getNome().equals("LBRACKET")){
             Match("LBRACKET");
-            //Expressao();
+            Expressao(no);
             Match("RBRACKET");
         } 
     }

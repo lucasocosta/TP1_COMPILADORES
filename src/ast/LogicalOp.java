@@ -13,7 +13,7 @@ public class LogicalOp extends Expr{
     
     public LogicalOp(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo LogicalOp");
+        System.out.print("Criando no do tipo LogicalOp\n");
     }
     
 }

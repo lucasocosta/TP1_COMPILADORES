@@ -13,7 +13,7 @@ public class While extends No{
     
     public While(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo While");
+        System.out.print("Criando no do tipo While\n");
     }
     
 }

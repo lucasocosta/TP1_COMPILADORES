@@ -13,7 +13,7 @@ public class Read extends No{
     
     public Read(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo Read");
+        System.out.print("Criando no do tipo Read\n");
     }
     
 }

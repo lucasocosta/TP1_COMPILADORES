@@ -12,21 +12,30 @@ import analisadorLexico.Token;
  * @author lucas
  */
 public class Num extends No{
-    
-    Token t;
+   
+    String valor;
+    String tipo;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     
     public Num(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo Num");
+        System.out.print("Criando no do tipo Num\n");
     }
 
-    public Token getToken() {
-        return t;
+    public String getValor() {
+        return valor;
     }
 
-    public void setToken(Token t) {
-        this.t = t;
+    public void setValor(String valor) {
+        this.valor = valor;
     }
-    
+
 }
 

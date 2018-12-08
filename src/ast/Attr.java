@@ -13,7 +13,7 @@ public class Attr extends No{
     
     public Attr(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo Attr");
+        System.out.print("Criando no do tipo Attr\n");
     }    
 }
 

@@ -15,7 +15,7 @@ public abstract class Expr extends No{
     
     public Expr(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo Expr");
+        System.out.print("Criando no do tipo Expr\n");
     }
 
     public String getOp() {

@@ -13,7 +13,7 @@ public class RelOp extends Expr{
     
     public RelOp(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo RelOp");
+        System.out.print("Criando no do tipo RelOp\n");
     }
     
 }

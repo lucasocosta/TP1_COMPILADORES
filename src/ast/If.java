@@ -13,7 +13,7 @@ public class If extends No{
     
     public If(String nome) {
         super(nome);
-        System.out.print("Criando no do tipo If");
+        System.out.print("Criando no do tipo If\n");
     }
     
 }
