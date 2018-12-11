@@ -9,7 +9,7 @@ package ast;
  *
  * @author lucas
  */
-public abstract class Expr extends No{
+public class Expr extends No{
     
     String op;
     
