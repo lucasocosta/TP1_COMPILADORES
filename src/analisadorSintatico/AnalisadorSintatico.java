@@ -299,7 +299,7 @@ public class AnalisadorSintatico {
     }
     private void Adicao (No no)
     {
-        ArithOp ar = new ArithOp("ArithOp");
+        ArithOp ar = new ArithOp("Expr");
         Termo(ar);
         AdicaoOpc(ar);
         no.addFilho(ar);
