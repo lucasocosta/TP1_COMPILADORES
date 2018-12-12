@@ -25,7 +25,9 @@ public class AST {
     
     public void imprime()
     {
-        raiz.print();
+        System.out.print("<Astnode>\n");
+        raiz.print(1);
+        System.out.print("<\\Astnode>\n");
     }
     
 }

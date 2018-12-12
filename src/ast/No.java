@@ -84,15 +84,9 @@ abstract public class No {
         this.valor=valor;
     }
     
-    public void print()
+    public void print(int level)
     {
-        System.out.print("<"+nome+">\n");
-        int i=0;
-        for(i=0;hasFilho(i);i++)
-        {
-            getFilho(i).print();
-        }
-        System.out.print("<\\"+nome+">\n");
+
     }
     
 }

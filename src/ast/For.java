@@ -16,4 +16,20 @@ public class For extends No{
         System.out.print("Criando no do tipo For\n");
     }
     
+    
+        public void print(int level)
+    {
+        int i;
+        String tab="";
+        for(i=0;i<level;i++)
+            tab=tab+"    ";
+        
+        System.out.print(tab+"<"+getNome()+">\n");
+    
+        for(i=0;hasFilho(i);i++)
+        {
+            getFilho(i).print(level+1);
+        }
+        System.out.print(tab+"<\\"+getNome()+">\n");
+    }
 }

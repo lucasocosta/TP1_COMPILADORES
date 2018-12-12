@@ -36,6 +36,22 @@ public class Num extends No{
     public void setValor(String valor) {
         this.valor = valor;
     }
+    
+        public void print(int level)
+    {
+        int i;
+        String tab="";
+        for(i=0;i<level;i++)
+            tab=tab+"    ";
+        
+        System.out.print(tab+"<"+getNome()+" valor='"+getValor()+"'>\n");
+    
+        for(i=0;hasFilho(i);i++)
+        {
+            getFilho(i).print(level+1);
+        }
+        //System.out.print(tab+"<\\"+getNome()+">\n");
+    }
 
 }
 

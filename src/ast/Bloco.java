@@ -15,4 +15,20 @@ public class Bloco extends No{
         super(nome);
         System.out.print("Criando no do tipo Bloco\n");
     }    
+    
+        public void print(int level)
+        {
+        int i;
+        String tab="";
+        for(i=0;i<level;i++)
+            tab=tab+"    ";
+        
+        //System.out.print(tab+"<"+getNome()+">\n");
+    
+        for(i=0;hasFilho(i);i++)
+        {
+            getFilho(i).print(level);
+        }
+        //System.out.print(tab+"<\\"+getNome()+">\n");
+    }
 }

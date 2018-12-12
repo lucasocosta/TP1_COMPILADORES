@@ -35,4 +35,20 @@ public class Id extends No{
         System.out.print("Criando no do tipo Id\n");
     }
     
+        public void print(int level)
+    {
+        int i;
+        String tab="";
+        for(i=0;i<level;i++)
+            tab=tab+"    ";
+        
+        System.out.print(tab+"<"+getNome()+" lexema='"+getLexema()+"'>\n");
+    
+        for(i=0;hasFilho(i);i++)
+        {
+            getFilho(i).print(level+1);
+        }
+        //System.out.print(tab+"<\\"+getNome()+">\n");
+    }
+    
 }

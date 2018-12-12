@@ -194,9 +194,15 @@ public class AnalisadorSintatico {
     }
     private void Atribuicao (No no)
     {
+        Attr at = new Attr("Attr");
+        
         Match("ID");
+        Id id=new Id("ID");
+        id.setLexema(tokens.get(pos-1).getLexema());
+        at.addFilho(id);
+        no.addFilho(at);
         Match("ATTR");
-        Expressao(no);
+        Expressao(at);
         Match("PCOMMA");
     }
     private void ComandoSe (No no)
@@ -281,24 +287,26 @@ public class AnalisadorSintatico {
     private void Expressao (No no)
     {
         //criar uma variavel para receber o retorno de adicao
-        Adicao(no);
+        Expr p = new Expr("");
+        Adicao(p);
         
-        RelacaoOpc(no); //passa o retorno
-        
+        RelacaoOpc(p); //passa o retorno
+        no.addFilho(p);
         //retorna a exp final
         
     }
-    private void RelacaoOpc (No no)
+    private void RelacaoOpc (Expr no)
     {
         if (tokens.get(pos).getNome().equals("LT") ||
             tokens.get(pos).getNome().equals("LE") ||
             tokens.get(pos).getNome().equals("GT") ||
             tokens.get(pos).getNome().equals("GE")){
-            RelOp relop = new RelOp("RelOp");
-            OpRel(relop);
-            Adicao(relop);
-            RelacaoOpc(relop);
-            no.addFilho(relop);
+            //RelOp relop = new RelOp("RelOp");
+            no.setNome("RelOp");
+            OpRel(no);
+            Adicao(no);
+            RelacaoOpc(no);
+            
         }
         else {
       
@@ -323,17 +331,18 @@ public class AnalisadorSintatico {
             no.setOp(">=");
         }
     }
-    private void Adicao (No no)
+    private void Adicao (Expr no)
     {
-        ArithOp ar = new ArithOp("ArithOp");
-        Termo(ar);
-        AdicaoOpc(ar);
-        no.addFilho(ar);
+        //ArithOp ar = new ArithOp("ArithOp");
+        Termo(no);
+        AdicaoOpc(no);
+        //no.addFilho(no);
     }
     private void AdicaoOpc (Expr no)
     {
         if (tokens.get(pos).getNome().equals("PLUS") ||
             tokens.get(pos).getNome().equals("MINUS")){
+            no.setNome("ArithOp");
             OpAdicao(no);
             Termo(no);
             
