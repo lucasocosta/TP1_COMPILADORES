@@ -46,6 +46,7 @@ public class AnalisadorSintatico {
             System.out.print(TabSimbolo.get(i).getLexema()+"\t"+TabSimbolo.get(i).getTipo()+"\t"+
                     TabSimbolo.get(i).getValor()+"\t"+TabSimbolo.get(i).getLinha()+"\n");
         }
+        ast.imprime();
         
     }
     private void Match(String tok)
@@ -186,8 +187,10 @@ public class AnalisadorSintatico {
     private void Bloco (No no)
     {
         Match("LBRACE");
-        Decl_Comando(no);
+        Bloco b = new Bloco("Bloco");
+        Decl_Comando(b);
         Match("RBRACE");
+        no.addFilho(b);
     }
     private void Atribuicao (No no)
     {
@@ -204,8 +207,9 @@ public class AnalisadorSintatico {
         Expressao(if_no);
         
         Match("RBRACKET");
-        Comando(no);
-        ComandoSenao(no);
+        Comando(if_no);
+        ComandoSenao(if_no);
+        no.addFilho(if_no);
     }
     private void ComandoSenao (No no)
     {
@@ -225,6 +229,7 @@ public class AnalisadorSintatico {
         Expressao(p);
         Match("RBRACKET");
         Comando(p);
+        no.addFilho(p);
     }
     private void ComandoRead (No no)
     {
@@ -260,6 +265,7 @@ public class AnalisadorSintatico {
         AtribuicaoFor(f);
         Match("RBRACKET");
         Comando(f);
+        no.addFilho(f);
     }
     private void AtribuicaoFor (No no)
     {
@@ -269,13 +275,17 @@ public class AnalisadorSintatico {
         id.setLexema(tokens.get(pos-1).getLexema());
         at.addFilho(id);
         Match("ATTR");
-        Expressao(at);
+        //at.addFilho(Expressao(at));
         s.setValor(tokens.get(pos-1).getLexema());
     }
     private void Expressao (No no)
     {
+        //criar uma variavel para receber o retorno de adicao
         Adicao(no);
-        RelacaoOpc(no);
+        
+        RelacaoOpc(no); //passa o retorno
+        
+        //retorna a exp final
         
     }
     private void RelacaoOpc (No no)
@@ -326,6 +336,7 @@ public class AnalisadorSintatico {
             tokens.get(pos).getNome().equals("MINUS")){
             OpAdicao(no);
             Termo(no);
+            
             AdicaoOpc(no);
         }
         else {

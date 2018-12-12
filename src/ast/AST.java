@@ -23,4 +23,9 @@ public class AST {
         raiz=root;
     }
     
+    public void imprime()
+    {
+        raiz.print();
+    }
+    
 }

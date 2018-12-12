@@ -38,6 +38,20 @@ abstract public class No {
     public List<No> getFilhos() {
         return filhos;
     }
+    
+    public No getFilho(int i)
+    {
+        return filhos.get(i);
+    }
+    
+    public boolean hasFilho(int i)
+    {
+        if(filhos.isEmpty())
+            return false;
+        if(filhos.size()>i)
+            return true;
+        return false;
+    }
 
     public void setFilhos(List<No> filhos) {
         this.filhos = filhos;
@@ -68,6 +82,17 @@ abstract public class No {
         this.nome=nome;
         this.tipo=tipo;
         this.valor=valor;
+    }
+    
+    public void print()
+    {
+        System.out.print("<"+nome+">\n");
+        int i=0;
+        for(i=0;hasFilho(i);i++)
+        {
+            getFilho(i).print();
+        }
+        System.out.print("<\\"+nome+">\n");
     }
     
 }

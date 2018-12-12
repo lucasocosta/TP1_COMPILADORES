@@ -1,8 +1,5 @@
 
 Tabela de Simbolos
 Lex	Tipo	Valor	Linha
-a	INT	10	2
-b	INT	2	3
-c	INT	null	3
-x	INT	0	9
-y	INT	1	9
+a	INT	2	2
+b	INT	1	3

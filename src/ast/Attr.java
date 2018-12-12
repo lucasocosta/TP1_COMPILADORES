@@ -15,6 +15,7 @@ public class Attr extends No{
         super(nome);
         System.out.print("Criando no do tipo Attr\n");
     }    
+    
 }
 
 
