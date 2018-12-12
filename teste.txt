@@ -7,9 +7,8 @@ int main()
     else
         a=1;
 
-  int x = 0, y = 1;
-  x = 3 * 2/b -a;
-  y = 2 >= x > y <= x;
+    int x = 0, y = 1;
+
     for(x=1;x<10;x=x+1)
     {
         print("teste");

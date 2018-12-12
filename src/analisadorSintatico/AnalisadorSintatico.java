@@ -220,42 +220,57 @@ public class AnalisadorSintatico {
     private void ComandoEnquanto (No no)
     {
         Match("WHILE");
+        While p = new While("While");
         Match("LBRACKET");
-        Expressao(no);
+        Expressao(p);
         Match("RBRACKET");
-        Comando(no);
+        Comando(p);
     }
     private void ComandoRead (No no)
     {
         Match("READ");
+        Read p = new Read("Read");
+        Id id = new Id("Id");
+        id.setLexema(tokens.get(pos).getLexema());
+        p.addFilho(id);
         Match("ID");
+        
         Match("PCOMMA");
+        no.addFilho(p);
     }
     private void ComandoPrint (No no)
     {
         Match("PRINT");
+        Print p = new Print("Print");
         Match("LBRACKET");
-        Expressao(no);
+        Expressao(p);
         Match("RBRACKET");
         Match("PCOMMA");
+        no.addFilho(p);
     }
     private void ComandoFor (No no)
     {
         Match("FOR");
+        For f = new For("For");
         Match("LBRACKET");
-        AtribuicaoFor(no);
+        AtribuicaoFor(f);
         Match("PCOMMA");
-        Expressao(no);
+        Expressao(f);
         Match("PCOMMA");
-        AtribuicaoFor(no);
+        AtribuicaoFor(f);
         Match("RBRACKET");
-        Comando(no);
+        Comando(f);
     }
     private void AtribuicaoFor (No no)
     {
-        Match("ID");
+        Attr at=new Attr("Attr");
+        no.addFilho(at);
+        Id id=new Id("ID");
+        id.setLexema(tokens.get(pos-1).getLexema());
+        at.addFilho(id);
         Match("ATTR");
-        Expressao(no);
+        Expressao(at);
+        s.setValor(tokens.get(pos-1).getLexema());
     }
     private void Expressao (No no)
     {
@@ -273,6 +288,7 @@ public class AnalisadorSintatico {
             OpRel(relop);
             Adicao(relop);
             RelacaoOpc(relop);
+            no.addFilho(relop);
         }
         else {
       
@@ -299,7 +315,7 @@ public class AnalisadorSintatico {
     }
     private void Adicao (No no)
     {
-        ArithOp ar = new ArithOp("Expr");
+        ArithOp ar = new ArithOp("ArithOp");
         Termo(ar);
         AdicaoOpc(ar);
         no.addFilho(ar);
@@ -328,12 +344,12 @@ public class AnalisadorSintatico {
             no.setOp("-");
         }        
     }
-    private void Termo (No no)
+    private void Termo (Expr no)
     {
         Fator(no);
         TermoOpc(no);
     }
-    private void TermoOpc (No no)
+    private void TermoOpc (Expr no)
     {
         if (tokens.get(pos).getNome().equals("MULT") ||
             tokens.get(pos).getNome().equals("DIV")){
@@ -342,16 +358,18 @@ public class AnalisadorSintatico {
             TermoOpc(no);
         }
         else {
-            
+           
         }
     }
-    private void OpMult (No no)
+    private void OpMult (Expr no)
     {
         if (tokens.get(pos).getNome().equals("MULT")){
             Match("MULT");
+            no.setOp("*");
         }
         else if (tokens.get(pos).getNome().equals("DIV")){
             Match("DIV");
+            no.setOp("/");
         } 
         
     }
