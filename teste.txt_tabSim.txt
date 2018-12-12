@@ -1,8 +1,7 @@
 
 Tabela de Simbolos
 Lex	Tipo	Valor	Linha
-a	INT	10	2
-b	INT	2	3
-c	INT	null	3
-x	INT	0	12
-y	INT	=	12
+i	INT	null	2
+j	INT	null	2
+k	INT	null	2
+a	FLOAT	=	3

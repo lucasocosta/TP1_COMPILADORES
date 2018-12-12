@@ -25,9 +25,13 @@ public class AST {
     
     public void imprime()
     {
-        System.out.print("<Astnode>\n");
-        raiz.print(1);
-        System.out.print("<\\Astnode>\n");
+        //System.out.print("<Astnode>\n");
+        
+        raiz.print(0);
+        
+        raiz.geraPython(0);
+        
+        //System.out.print("<\\Astnode>\n");
     }
     
 }

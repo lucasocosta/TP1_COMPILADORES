@@ -35,7 +35,7 @@ public class Id extends No{
         System.out.print("Criando no do tipo Id\n");
     }
     
-        public void print(int level)
+    public void print(int level)
     {
         int i;
         String tab="";
@@ -50,5 +50,20 @@ public class Id extends No{
         }
         //System.out.print(tab+"<\\"+getNome()+">\n");
     }
+    
+    
+    public void geraPython(int level)
+    {
+        int i;
+        String tab="";
+        for(i=0;i<level;i++)
+            tab=tab+"    ";
+        
+        System.out.print(getLexema());
+    
+        //System.out.print(tab+"<\\"+getNome()+">\n");
+    }
+    
+    
     
 }

@@ -32,6 +32,25 @@ public class Attr extends No{
         }
         System.out.print(tab+"<\\"+getNome()+">\n");
     }
+    
+    public void geraPython(int level)
+    {
+        int i;
+        String tab="";
+        for(i=0;i<level;i++)
+            tab=tab+"    ";
+        
+        //System.out.print(tab+"<"+getNome()+">\n");
+        System.out.print(tab);
+    
+        getFilho(0).geraPython(0);
+        
+        System.out.print("=");
+        
+        getFilho(1).geraPython(0);
+        
+        System.out.print("\n");
+    }
 }
 
 

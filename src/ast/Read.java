@@ -30,4 +30,17 @@ public class Read extends No{
         }
         System.out.print(tab+"<\\"+getNome()+">\n");
     }
+    
+             public void geraPython(int level)
+    {
+        int i;
+        String tab="";
+        for(i=0;i<level;i++)
+            tab=tab+"    ";
+        
+        //System.out.print(tab+"<"+getNome()+">\n");
+        System.out.print(tab+""+getFilho(0).getLexema()+"=raw_input()");
+        
+        System.out.print("\n");
+    }
 }

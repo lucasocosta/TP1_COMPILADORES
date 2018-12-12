@@ -28,17 +28,58 @@ public class If extends No{
     
         for(i=0;hasFilho(i);i++)
         {
+            /*
             if(i==2)
             {
                 System.out.print(tab+"<Else>\n");
             }
+            */
             getFilho(i).print(level+1);
-            
+            /*
             if(i==2)
             {
                 System.out.print(tab+"<\\Else>\n");
             }
+            */
         }
         System.out.print(tab+"<\\"+getNome()+">\n");
+    }
+        
+    public void geraPython(int level)
+    {
+        int i;
+        String tab="";
+        for(i=0;i<level;i++)
+            tab=tab+"    ";
+        
+        //System.out.print(tab+"<"+getNome()+">\n");
+        System.out.print(tab+"if (");
+        
+        getFilho(0).geraPython(0);
+        
+        System.out.print("):\n");
+        
+        
+        getFilho(1).geraPython(level+1);
+        
+        System.out.print("\n");
+        
+        if(hasFilho(2))
+        {
+            
+            if(getFilho(2).getNome().equals("If"))
+            {
+                System.out.print(tab+"el");
+                getFilho(2).geraPython(0);
+            }
+            else
+            {
+                System.out.print(tab+"else:\n");
+                getFilho(2).geraPython(level+1);
+            }
+            
+            
+            
+        }
     }
 }

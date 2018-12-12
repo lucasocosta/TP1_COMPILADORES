@@ -32,4 +32,31 @@ public class For extends No{
         }
         System.out.print(tab+"<\\"+getNome()+">\n");
     }
+        
+         public void geraPython(int level)
+    {
+        int i;
+        String tab="";
+        for(i=0;i<level;i++)
+            tab=tab+"    ";
+        
+        /*System.out.print(tab+"<"+getNome()+">\n");
+        if(hasFilho(0))
+            getFilho(0).geraPython(level);
+        
+        
+        System.out.print(tab+"While (");
+        if(hasFilho(1))
+            getFilho(1).geraPython(0);
+        
+        System.out.print("):\n");
+        
+        if(hasFilho(2))
+            getFilho(2).geraPython(level+1);
+        if(hasFilho(3))
+            getFilho(3).geraPython(level+1);
+        
+        System.out.print("\n");
+           */
+    }
 }

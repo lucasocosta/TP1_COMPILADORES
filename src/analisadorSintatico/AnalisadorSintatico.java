@@ -27,6 +27,54 @@ public class AnalisadorSintatico {
     private Simbolo s;
     private TabelaSimbolos TabSimbolo;
     private AST ast;
+
+    public List<Token> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(List<Token> tokens) {
+        this.tokens = tokens;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
+    public int getTam() {
+        return tam;
+    }
+
+    public void setTam(int tam) {
+        this.tam = tam;
+    }
+
+    public Simbolo getS() {
+        return s;
+    }
+
+    public void setS(Simbolo s) {
+        this.s = s;
+    }
+
+    public TabelaSimbolos getTabSimbolo() {
+        return TabSimbolo;
+    }
+
+    public void setTabSimbolo(TabelaSimbolos TabSimbolo) {
+        this.TabSimbolo = TabSimbolo;
+    }
+
+    public AST getAst() {
+        return ast;
+    }
+
+    public void setAst(AST ast) {
+        this.ast = ast;
+    }
     
     
     public AnalisadorSintatico(List<Token> t)
@@ -74,7 +122,7 @@ public class AnalisadorSintatico {
         Match("LBRACKET");
         Match("RBRACKET");
         Match("LBRACE");
-        Bloco main = new Bloco("MAIN");
+        Bloco main = new Bloco("AST");
         ast.setRaiz(main);
         Decl_Comando(main);
         Match("RBRACE");

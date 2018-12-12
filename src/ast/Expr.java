@@ -31,12 +31,11 @@ public class Expr extends No {
 
             int i;
             String tab = "";
-            for (i = 0; i < level-1; i++) {
+            for (i = 0; i < level - 1; i++) {
                 tab = tab + "    ";
             }
 
             //System.out.print(tab + "<" + getNome() + ">\n");
-
             for (i = 0; hasFilho(i); i++) {
                 getFilho(i).print(level);
             }
@@ -49,12 +48,41 @@ public class Expr extends No {
             tab = tab + "    ";
         }
 
-        System.out.print(tab + "<" + getNome() + " op='"+getOp()+"'>\n");
+        System.out.print(tab + "<" + getNome() + " op='" + getOp() + "'>\n");
 
         for (i = 0; hasFilho(i); i++) {
             getFilho(i).print(level + 1);
         }
         System.out.print(tab + "<\\" + getNome() + ">\n");
+    }
+
+    public void geraPython(int level) {
+
+        if (getNome().equals("")) {
+
+            int i;
+            //System.out.print(tab + "<" + getNome() + ">\n");
+
+            for (i = 0; hasFilho(i); i++) {
+                getFilho(i).geraPython(0);
+            }
+            //System.out.print(tab + "<\\" + getNome() + ">\n");
+            return;
+        }
+        int i;
+        String tab = "";
+        for (i = 0; i < level; i++) {
+            tab = tab + "    ";
+        }
+
+        //System.out.print(tab+"<"+getNome()+">\n");
+        getFilho(0).geraPython(0);
+
+        System.out.print(getOp());
+
+        getFilho(1).geraPython(0);
+
+        //System.out.print(tab+"\n");
     }
 
 }

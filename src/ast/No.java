@@ -17,6 +17,15 @@ abstract public class No {
     private List<No> filhos;
     private String tipo;
     private String valor;
+    private String lexema;
+
+    public String getLexema() {
+        return lexema;
+    }
+
+    public void setLexema(String lexema) {
+        this.lexema = lexema;
+    }
     
     public No(String nome)
     {
@@ -87,6 +96,11 @@ abstract public class No {
     public void print(int level)
     {
 
+    }
+    
+    public void geraPython(int level)
+    {
+        
     }
     
 }
