@@ -415,13 +415,18 @@ public class AnalisadorSintatico {
     }
     private void Termo (Expr no)
     {
-        Fator(no);
-        TermoOpc(no);
+        Expr exp = new Expr("");
+        Fator(exp);
+        TermoOpc(exp);
+        no.addFilho(exp);
     }
     private void TermoOpc (Expr no)
     {
+        
+        
         if (tokens.get(pos).getNome().equals("MULT") ||
             tokens.get(pos).getNome().equals("DIV")){
+            no.setNome("ArithOp");
             OpMult(no);
             Fator(no);
             TermoOpc(no);
@@ -464,6 +469,7 @@ public class AnalisadorSintatico {
         }
         else if (tokens.get(pos).getNome().equals("LBRACKET")){
             Match("LBRACKET");
+            no.setHasParenteses(true);
             Expressao(no);
             Match("RBRACKET");
         } 
