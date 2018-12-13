@@ -40,7 +40,7 @@ public class For extends No{
         for(i=0;i<level;i++)
             tab=tab+"    ";
         
-        /*System.out.print(tab+"<"+getNome()+">\n");
+        //System.out.print(tab+"<"+getNome()+">\n");
         if(hasFilho(0))
             getFilho(0).geraPython(level);
         
@@ -57,6 +57,6 @@ public class For extends No{
             getFilho(3).geraPython(level+1);
         
         System.out.print("\n");
-           */
+           
     }
 }

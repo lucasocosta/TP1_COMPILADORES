@@ -4,4 +4,4 @@ Lex	Tipo	Valor	Linha
 i	INT	null	2
 j	INT	null	2
 k	INT	null	2
-a	FLOAT	=	3
+a	FLOAT	1	3

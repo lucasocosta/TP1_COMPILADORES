@@ -70,7 +70,7 @@ public class If extends No{
             if(getFilho(2).getNome().equals("If"))
             {
                 System.out.print(tab+"el");
-                getFilho(2).geraPython(0);
+                getFilho(2).geraPython(level);
             }
             else
             {

@@ -326,10 +326,11 @@ public class AnalisadorSintatico {
         Attr at=new Attr("Attr");
         no.addFilho(at);
         Id id=new Id("ID");
+        Match("ID");
         id.setLexema(tokens.get(pos-1).getLexema());
         at.addFilho(id);
         Match("ATTR");
-        //at.addFilho(Expressao(at));
+        Expressao(at);
         s.setValor(tokens.get(pos-1).getLexema());
     }
     private void Expressao (No no)
